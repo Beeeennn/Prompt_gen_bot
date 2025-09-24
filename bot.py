@@ -1,7 +1,7 @@
 import os
 import discord
 from discord.ext import commands
-import aiohttp
+import aiohttp.web
 import asyncio
 import random
 
@@ -53,4 +53,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
