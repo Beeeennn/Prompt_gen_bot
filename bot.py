@@ -71,7 +71,9 @@ async def generate_veo_prompt():
         "with a gaping wound on his shoulder, a tourniquet applied hastily",
         "with multiple gunshot wounds to the chest, struggling to breathe",
         "with a disfigured face from a concussive blast",
-        "with a shattered kneecap, crawling for cover"]
+        "with a shattered kneecap, crawling for cover",
+        "with a piece of metal lodged in his neck, a look of shock on his face",
+    ]
 
     # Actions and reactions
     actions_reactions = [
@@ -130,17 +132,14 @@ async def generate_veo_prompt():
         "under the scorching sun",
     ]
 
-    # Camera movements and perspectives
+    # --- MODIFIED: Drone view shots from different heights ---
     camera_options = [
-        "an aerial shot, slowly panning across the scene",
-        "a low-angle tracking shot, following the soldiers",
-        "a high-angle shot, looking down on the action",
-        "a slow cinematic pan across the group",
-        "a handheld camera, slightly shaky and close-up",
-        "a static wide shot showing the entire scene",
-        "a dolly zoom shot, with the background changing perspective",
-        "a quick zoom-in to a soldier's face, highlighting emotion",
-        "a circular tracking shot around the group of soldiers",
+        "A low-altitude drone shot, panning across the scene",
+        "A medium-altitude drone shot, slowly tracking the soldiers",
+        "A high-altitude drone shot, offering a wide, panoramic view",
+        "A drone shot from directly above, slowly pulling back to reveal the full scope",
+        "A low-altitude drone shot, circling the group",
+        "A high-altitude drone shot, zooming in on a specific soldier",
     ]
 
     # --- Weighted Random Selection ---
@@ -201,7 +200,7 @@ async def ping(ctx):
 @bot.command()
 async def prompt(ctx):
     video_class, prompt_text = await generate_veo_prompt()
-    await ctx.send(f"##{video_class}##\n`{prompt_text}`")
+    await ctx.send(f"## {video_class}##\n`{prompt_text}`")
     
     
 async def main():
