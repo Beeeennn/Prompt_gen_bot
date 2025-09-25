@@ -39,7 +39,7 @@ async def start_http_server():
     return runner
 import random
 
-def generate_random_prompt():
+async def generate_random_prompt():
     """
     Generates a realistic, cinematic prompt for an AI video model.
     The script randomly selects a scenario type, number of soldiers,
