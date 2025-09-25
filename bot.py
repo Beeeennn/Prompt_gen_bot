@@ -39,149 +39,151 @@ async def start_http_server():
     return runner
 import random
 
-async def generate_veo_prompt():
+def generate_random_prompt():
     """
-    Generates a video prompt for a Veo 3-like model based on specific
-    criteria, including injured soldiers, environment, and camera work.
+    Generates a realistic, cinematic prompt for an AI video model.
+    The script randomly selects a scenario type, number of soldiers,
+    and other visual elements to create a unique prompt.
 
     Returns:
-        tuple: A tuple containing the class (str) and the generated prompt (str).
+        tuple: A tuple containing the scenario type ('injured', 'uninjured', or 'mixed')
+               and the generated prompt string.
     """
+    # --- Lists of variations (with more than 10 options each) ---
+    scenario_type = random.choice(["injured", "uninjured", "mixed", "uninjured", "mixed", "uninjured", "mixed"])
+    num_soldiers = random.randint(2, 5)
 
-    # --- Prompt Elements ---
-    # Soldier descriptions and gear
-    soldiers = [
-        "a squad of soldiers in modern combat gear",
-        "two special forces operators",
-        "a group of exhausted infantrymen",
-        "a single soldier with a tactical backpack",
-        "an elite sniper team in ghillie suits",
-        "a lone medic tending to a fallen comrade",
-        "a unit of futuristic soldiers in powered armor",
-        "a weary soldier with a dirt-stained face and blank eyes",
+    camera_heights = [
+        "a very high altitude, offering a wide, sweeping view",
+        "a medium altitude, providing a detailed view of the terrain",
+        "a low altitude, just above the canopy",
+        "an extreme high altitude, revealing the entire landscape",
+        "a high altitude, with a slightly tilted perspective",
+        "from a 'god's eye' view, perfectly perpendicular to the ground",
+        "from a low, hovering position near the ground",
+        "just above the treeline, capturing the top of the canopy",
+        "at eye level with a towering rock formation",
+        "a high vantage point, looking down into a valley"
     ]
 
-    # Explicit injuries of varying severity
-    explicit_injuries = [
-        "with a deep laceration on his leg, bleeding visibly",
-        "with a severe burn on his arm, skin peeling away",
-        "with a bandage wrapped around his head, blood seeping through",
-        "with a large shrapnel wound on his torso, struggling to stand",
-        "with a torn uniform and a compound fracture in his arm",
-        "with a gaping wound on his shoulder, a tourniquet applied hastily",
-        "with multiple gunshot wounds to the chest, struggling to breathe",
-        "with a disfigured face from a concussive blast",
-        "with a shattered kneecap, crawling for cover",
-        "with a piece of metal lodged in his neck, a look of shock on his face",
+    camera_movements = [
+        "flying directly overhead on a steady, expansive path",
+        "slowly panning across the scene",
+        "gradually descending and circling the area",
+        "tilting down to focus on the ground",
+        "a slow dolly-in, pushing towards the subject",
+        "a slow pull-out shot, revealing the immense scale",
+        "a subtle orbit shot, circling the soldiers",
+        "a steady tracking shot, following a lone figure",
+        "a gentle crane shot, rising slowly to reveal the full scene",
+        "a static, locked-off camera view from above"
     ]
 
-    # Actions and reactions
-    actions_reactions = [
-        "reacting to a sudden ambush, taking cover and returning fire",
-        "administering first aid to an injured comrade, their faces strained with effort",
-        "calling for an emergency medical evacuation, their voices hoarse",
-        "making a desperate last stand against overwhelming odds",
-        "navigating through dense wreckage, inspecting the damage",
-        "clearing a building room-by-room, guns up and alert",
-        "sharing a moment of quiet reflection, sitting against a wall",
-        "reacting to the sound of an approaching enemy patrol, freezing in place",
-        "hiding in the shadows, listening to enemy comms",
-        "reloading their rifle while maintaining a defensive position",
-        "pulling a fallen comrade to safety under heavy fire",
-        "setting up a defensive perimeter and checking their gear",
-        "on patrol, scanning the horizon for any sign of movement",
-        "resting in a bombed-out building, sharing MREs and water",
+    time_of_day = [
+        "under a brilliant morning sun",
+        "in the harsh light of midday",
+        "as dusk settles, casting long shadows",
+        "in the dead of night, with only moonlight to guide them",
+        "during the golden hour, with soft, warm light",
+        "just before dawn, with a cold, blue light",
+        "at sunset, with vibrant orange and purple hues",
+        "under the midday haze, with soft, ambient light",
+        "under a full moon, with stark, high-contrast shadows"
     ]
 
-    # Environments
+    weather = [
+        "with heavy, blowing snow",
+        "in a freezing downpour of rain",
+        "under a clear, cloudless sky",
+        "amidst a swirling sandstorm",
+        "with a thick, cold fog rolling in",
+        "during a fierce wind, kicking up dust and debris",
+        "in a steady, cold drizzle",
+        "amidst a light flurry of snowflakes",
+        "under a bleak, overcast sky with no rain",
+        "in a hazy, humid atmosphere"
+    ]
+
     environments = [
-        "in a desolate, war-torn desert",
-        "in the dense undergrowth of a jungle",
-        "in the crumbling ruins of a cityscape",
-        "on a rocky, snow-covered mountain ridge",
-        "inside a dimly lit, abandoned bunker",
-        "in a flooded, swampy forest",
-        "on a desolate, windswept coastline",
-        "in a dense, forgotten bamboo forest",
-        "in a futuristic, neon-lit urban warzone",
-        "inside a dusty, collapsed subway tunnel",
+        "a desolate, snow-covered mountain ridge",
+        "an arid, rocky desert",
+        "a dense, wet spruce forest",
+        "a muddy, war-torn battlefield",
+        "the cracked, sun-scorched earth of a salt flat",
+        "a windswept, icy tundra",
+        "a ruined, bombed-out urban landscape",
+        "a vast, empty sand dune field",
+        "a humid, overgrown jungle clearing",
+        "a jagged volcanic landscape with smoking vents"
     ]
 
-    # Times of day
-    times_of_day = [
-        "at night",
-        "at dawn",
-        "in the evening",
-        "in the middle of the day",
-        "at dusk",
-        "just before midnight",
-        "in the early morning",
-        "at high noon",
+    actions = [
+        "walking slowly and cautiously",
+        "huddled together, looking for warmth",
+        "setting up a temporary camp",
+        "hiding behind large rocks",
+        "crawling slowly towards a makeshift shelter",
+        "sprinting from cover to cover",
+        "looking through binoculars at a distant point",
+        "providing first aid to a comrade",
+        "scrambling up a steep incline"
     ]
 
-    # Weather conditions
-    weather_conditions = [
-        "in heavy rain",
-        "with a heavy fog rolling in",
-        "with a sandstorm brewing",
-        "under clear weather",
-        "with light snowfall",
-        "during a fierce thunderstorm with lightning and thunder",
-        "under a cold, bone-chilling mist",
-        "with a light, but steady drizzle",
-        "under the scorching sun",
+    injured_body_parts = [
+        "arm", "leg", "torso", "head", "shoulder", "back", "foot"
     ]
 
-    # --- MODIFIED: Drone view shots from different heights ---
-    camera_options = [
-        "A low-altitude drone shot, panning across the scene",
-        "A medium-altitude drone shot, slowly tracking the soldiers",
-        "A high-altitude drone shot, offering a wide, panoramic view",
-        "A drone shot from directly above, slowly pulling back to reveal the full scope",
-        "A low-altitude drone shot, circling the group",
-        "A high-altitude drone shot, zooming in on a specific soldier",
+    injury_severities = [
+        "gravely wounded with a makeshift tourniquet applied to his",
+        "visibly and severely wounded, with torn clothing and a bloodied",
+        "badly bruised and sprained",
+        "limping heavily with a fractured",
+        "bleeding from a shrapnel wound to his"
     ]
 
-    # --- Weighted Random Selection ---
-    # The ratio for uninjured:mixed:injured is 1:2:2.
-    # The weights for random.choices should reflect this ratio.
-    prompt_classes = ["uninjured", "mixed", "injured"]
-    weights = [1, 2, 2]
-    video_class = random.choices(prompt_classes, weights=weights, k=1)[0]
+    # --- Construct the base prompt ---
+    base_prompt = (
+        f"Top-down drone shot from {random.choice(camera_heights)}, {random.choice(camera_movements)}, "
+        f"capturing a scene {random.choice(time_of_day)} in {random.choice(weather)}. "
+        f"The setting is {random.choice(environments)}. "
+        f"Cinematography, hyperrealistic, dramatic, film grain."
+    )
 
-    # --- Prompt Construction ---
-    soldier_subject = random.choice(soldiers)
-    action_reaction = random.choice(actions_reactions)
-    camera = random.choice(camera_options)
+    # --- Construct the soldier-specific part of the prompt ---
+    soldiers_prompt = ""
+    injured_count = 0
     
-    # Cyclical environment selection
-    # Using a list with indices allows us to ensure each category is always used.
-    environment = random.choice(environments)
-    time = random.choice(times_of_day)
-    weather = random.choice(weather_conditions)
-    environment_string = f"{environment} {time} {weather}"
-
-    # Build the prompt based on the chosen class
-    if video_class == "injured":
-        injury = random.choice(explicit_injuries)
-        prompt = f"A realistic cinematic video of {soldier_subject} {injury}, {action_reaction}. The scene takes place {environment_string}. The camera is {camera}."
+    if scenario_type == "uninjured":
+        soldiers_prompt = f"A squad of {num_soldiers} soldiers are {random.choice(actions)}. They appear to be in good health."
     
-    elif video_class == "mixed":
-        # A mixed prompt needs at least two soldiers to work effectively
-        if len(soldiers) == 1:
-            soldier_subject = random.choice([
-                "a squad of soldiers",
-                "two special forces operators",
-                "a group of infantrymen"
-            ])
+    elif scenario_type == "injured":
+        injured_count = num_soldiers
+    
+    elif scenario_type == "mixed":
+        injured_count = random.randint(1, num_soldiers - 1)
+    
+    # Logic for injured and mixed scenarios
+    if injured_count > 0:
+        injured_prompts = []
+        for i in range(injured_count):
+            injury_description = f"a soldier lying on the ground, his {random.choice(injured_body_parts)} {random.choice(injury_severities)} {random.choice(injured_body_parts)}."
+            injured_prompts.append(injury_description)
         
-        injury = random.choice(explicit_injuries)
-        prompt = f"A realistic cinematic video of {soldier_subject}, one of them {injury}, {action_reaction}. The scene takes place {environment_string}. The camera is {camera}."
-
-    else: # Uninjured
-        prompt = f"A realistic cinematic video of {soldier_subject} {action_reaction}. The scene takes place {environment_string}. The camera is {camera}."
+        uninjured_count = num_soldiers - injured_count
         
-    return (video_class, prompt)
+        if uninjured_count > 0:
+            uninjured_prompts = []
+            for i in range(uninjured_count):
+                action_description = f"another soldier {random.choice(actions)}"
+                uninjured_prompts.append(action_description)
+            
+            soldiers_prompt = " and ".join(injured_prompts) + ". " + " and ".join(uninjured_prompts)
+        else:
+            soldiers_prompt = " and ".join(injured_prompts)
+        
+    final_prompt = f"{base_prompt} The scene shows a group of {num_soldiers} soldiers; {soldiers_prompt}"
+    
+    return (scenario_type, final_prompt)
 
         
 # Discord Bot Logic
@@ -190,16 +192,13 @@ async def on_ready():
     print(f'Logged in as {bot.user.name}!')
     print('------')
 
-# List of random words for the bot to choose from
-random_words = ["apple", "banana", "cherry", "dragon", "echo", "foxtrot", "glove", "hat"]
-
 @bot.command()
 async def ping(ctx):
     await ctx.send('Pong!')
 
 @bot.command()
 async def prompt(ctx):
-    video_class, prompt_text = await generate_veo_prompt()
+    video_class, prompt_text = await generate_random_prompt()
     await ctx.send(f"## {video_class}##\n`{prompt_text}`")
     
     
