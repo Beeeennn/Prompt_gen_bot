@@ -56,26 +56,14 @@ def generate_random_prompt():
     camera_heights = [
         "a very high altitude, offering a wide, sweeping view",
         "a medium altitude, providing a detailed view of the terrain",
-        "a low altitude, just above the canopy",
-        "an extreme high altitude, revealing the entire landscape",
-        "a high altitude, with a slightly tilted perspective",
-        "from a 'god's eye' view, perfectly perpendicular to the ground",
-        "from a low, hovering position near the ground",
-        "just above the treeline, capturing the top of the canopy",
-        "at eye level with a towering rock formation",
-        "a high vantage point, looking down into a valley"
+        "a low altitude",
     ]
 
     camera_movements = [
         "flying directly overhead on a steady, expansive path",
         "slowly panning across the scene",
-        "gradually descending and circling the area",
-        "tilting down to focus on the ground",
         "a slow dolly-in, pushing towards the subject",
-        "a slow pull-out shot, revealing the immense scale",
         "a subtle orbit shot, circling the soldiers",
-        "a steady tracking shot, following a lone figure",
-        "a gentle crane shot, rising slowly to reveal the full scene",
         "a static, locked-off camera view from above"
     ]
 
