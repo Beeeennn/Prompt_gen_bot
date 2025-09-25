@@ -134,7 +134,7 @@ async def generate_random_prompt():
         f"Top-down drone shot from {random.choice(camera_heights)}, {random.choice(camera_movements)}, "
         f"capturing a scene {random.choice(time_of_day)} in {random.choice(weather)}. "
         f"The setting is {random.choice(environments)}. "
-        f"Cinematography, hyperrealistic, dramatic, film grain."
+        f"Cinematography, hyperrealistic."
     )
 
     # --- Construct the soldier-specific part of the prompt ---
