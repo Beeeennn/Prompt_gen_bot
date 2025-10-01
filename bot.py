@@ -195,7 +195,23 @@ async def generate_random_prompt():
         "messages": [
             {
                 "role": "user",
-                "content": f"I want to make a prompt for a text to video model to generate a realistic 8 second top-down video of {inj_str if scenario_type!="uninjured" else ""} {"and" if scenario_type=="mixed" else ""} {uninj_str if scenario_type!="injured" else ""}. be specific about environment, weather, {"injury type" if scenario_type!="uninjured" else ""} and any other necessary things to make it a realistic as possible. it is very important to emphasise the top-down perspective, it should be panning accross. tell me it in plain text with no introduction. try to keep it between 500 and 1500 characters."
+                "content": f"""Please generate a specific and realistic prompt for a text-to-video model. The video should be 8 seconds long and filmed from a top-down, panning perspective. The content should be highly detailed and ready for a text-to-video model. The prompt must be a single block of text, with no introduction, and between 500 and 1500 characters.
+
+The scene must include the following elements:
+- A specific, realistic outdoor environment (e.g., a city street, a hiking trail, a public park). Be descriptive about the time of day, lighting, and general atmosphere.
+- Specific weather conditions (e.g., light drizzle, sunny with a slight breeze, overcast and foggy).
+- An explicit focus on the top-down perspective, with a clear instruction for the camera to pan across the scene.
+- A combination of both an injured person and an uninjured person.
+- The injured person must have a specific, non-life-threatening injury (e.g., a sprained ankle, a scraped knee, a bruised arm). Describe their posture and how the injury affects their movement.
+- The uninjured person should be interacting with the injured person or present in the scene, showing typical uninjured movement.
+
+Please vary the following elements in your response:
+- The type of environment and weather.
+- The specific injury and its visual effect.
+- The interaction between the injured and uninjured people.
+
+Example output format:
+"A highly realistic 8 second top-down video of a paved city sidewalk on a crisp autumn afternoon. The camera pans smoothly from left to right, revealing a diverse crowd of pedestrians. In the foreground, a young woman is kneeling on the ground, holding her left ankle with a grimace, her shoes and leggings slightly scuffed. Her friend stands beside her, bending down with a concerned expression, offering her a hand. The ground is littered with fallen yellow and red leaves. The scene is bathed in golden hour light, casting long shadows. Traffic is visible in the distance, with the sound of light chatter and distant cars." """
             }
         ],
         "model": "openai/gpt-oss-120b:cerebras"
