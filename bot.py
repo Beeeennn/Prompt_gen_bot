@@ -187,6 +187,13 @@ async def generate_random_prompt():
     num_uninj = random.randint(1, 4)
     inj_str = str(num_inj_soldiers)+" injured soldiers"
     uninj_str = str(num_uninj)+" uninjured soldiers"
+
+    if scenario_type == "injured":
+        soldiers_str = str(num_inj_soldiers) + " injured soldiers"
+    elif scenario_type == "uninjured":
+        soldiers_str = str(num_uninj) + " uninjured soldiers"
+    else:
+        soldiers_str = str(num_uninj) + " uninjured soldiers"
     def query(payload):
         response = requests.post(API_URL, headers=headers, json=payload)
         return response.json()
@@ -196,12 +203,12 @@ async def generate_random_prompt():
             {
                 "role": "user",
                 "content": f"""Please generate a specific and realistic prompt for a text-to-video model. The video should be 8 seconds long and filmed from a top-down, panning perspective. The content should be highly detailed and ready for a text-to-video model. The prompt must be a single block of text, with no introduction, and between 500 and 1500 characters.
-
+The scene should be a battlefield.
 The scene must include the following elements:
 - A specific, realistic outdoor environment (e.g., a city street, a hiking trail, a public park). Be descriptive about the time of day, lighting, and general atmosphere.
 - Specific weather conditions (e.g., light drizzle, sunny with a slight breeze, overcast and foggy).
 - An explicit focus on the top-down perspective, with a clear instruction for the camera to pan across the scene.
-- A combination of both an injured person and an uninjured person.
+- {soldiers_str}
 - The injured person must have a specific, non-life-threatening injury (e.g., a sprained ankle, a scraped knee, a bruised arm). Describe their posture and how the injury affects their movement.
 - The uninjured person should be interacting with the injured person or present in the scene, showing typical uninjured movement.
 
