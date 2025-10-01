@@ -217,7 +217,7 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send('Pong!')
 
-@bot.command()
+@bot.command(aliases=['p', 'pmt'])
 async def prompt(ctx):
     video_class, prompt_text = await generate_random_prompt()
     await ctx.send(f"## {video_class}##\n`{prompt_text}`")
