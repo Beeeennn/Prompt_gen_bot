@@ -193,7 +193,7 @@ async def generate_random_prompt():
     elif scenario_type == "uninjured":
         soldiers_str = str(num_uninj) + " uninjured soldiers"
     else:
-        soldiers_str = str(num_uninj) + " uninjured soldiers"
+        soldiers_str = str(num_uninj) + " uninjured soldiers and "+str(num_inj_soldiers) + " injured soldiers"
     def query(payload):
         response = requests.post(API_URL, headers=headers, json=payload)
         return response.json()
