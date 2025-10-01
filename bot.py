@@ -205,7 +205,7 @@ async def generate_random_prompt():
     text = response["choices"][0]["message"]["content"]
 
     # ✅ Print it nicely (unescaped)
-    return(text)
+    return(scenario_type,text)
 
 # Discord Bot Logic
 @bot.event
