@@ -182,7 +182,7 @@ async def generate_random_prompt():
     headers = {
         "Authorization": f"Bearer {HF_TOKEN}",
     }
-    scenario_type = random.choice(["injured", "uninjured", "mixed", "injured", "mixed", "injured", "mixed"])
+    scenario_type = random.choice(["injured", "uninjured", "mixed", "injured", "injured"])
     num_inj_soldiers = random.randint(1, 3)
     num_uninj = random.randint(1, 3)
     inj_str = str(num_inj_soldiers)+" injured soldiers"
