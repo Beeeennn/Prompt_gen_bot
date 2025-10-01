@@ -195,7 +195,7 @@ async def generate_random_prompt():
         "messages": [
             {
                 "role": "user",
-                "content": f"I want to make a prompt for a text to video model to generate a realistic video of {inj_str if scenario_type!="uninjured" else ""} {"and" if scenario_type=="mixed" else ""} {uninj_str if scenario_type!="injured" else ""}. be specific about environment, weather, {"injury type" if scenario_type!="uninjured" else ""} and any other necessary things to make it a realistic as possible, come up with interractions the soldiers may have in their scenarios. it is very important to emphasise the drone perspective, it should be panning accross. tell me it in plain text with no introduction."
+                "content": f"I want to make a prompt for a text to video model to generate a realistic video of {inj_str if scenario_type!="uninjured" else ""} {"and" if scenario_type=="mixed" else ""} {uninj_str if scenario_type!="injured" else ""}. be specific about environment, weather, {"injury type" if scenario_type!="uninjured" else ""} and any other necessary things to make it a realistic as possible, come up with interractions the soldiers may have in their scenarios. it is very important to emphasise the drone perspective, it should be panning accross. tell me it in plain text with no introduction. try to keep it between 500 and 1500 characters."
             }
         ],
         "model": "openai/gpt-oss-120b:cerebras"
