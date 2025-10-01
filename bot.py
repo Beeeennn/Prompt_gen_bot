@@ -6,14 +6,15 @@ import discord
 from discord.ext import commands
 from aiohttp import web
 import aiohttp
-
+import os
+import requests
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
 # Read required env vars
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 PORT = int(os.getenv("PORT", 8080))
-
+HF_TOKEN = HF_TOKEN = os.getenv("HF_TOKEN") or "tok"
 # Bot setup
 intents = discord.Intents.default()
 intents.message_content = True
@@ -39,7 +40,7 @@ async def start_http_server():
     return runner
 import random
 
-async def generate_random_prompt():
+async def generate_random_prompt_old():
     """
     Generates a realistic, cinematic prompt for an AI video model.
     The script randomly selects a scenario type, number of soldiers,
@@ -173,7 +174,39 @@ async def generate_random_prompt():
     
     return (scenario_type, final_prompt)
 
-        
+
+async def generate_random_prompt():
+
+
+    API_URL = "https://router.huggingface.co/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {HF_TOKEN}",
+    }
+    scenario_type = random.choice(["injured", "uninjured", "mixed", "injured", "mixed", "injured", "mixed"])
+    num_inj_soldiers = random.randint(1, 4)
+    num_uninj = random.randint(1, 4)
+    inj_str = str(num_inj_soldiers)+" injured soldiers"
+    uninj_str = str(num_uninj)+" uninjured soldiers"
+    def query(payload):
+        response = requests.post(API_URL, headers=headers, json=payload)
+        return response.json()
+
+    response = query({
+        "messages": [
+            {
+                "role": "user",
+                "content": f"I want to make a prompt for a text to video model to generate a realistic video of {inj_str if scenario_type!="uninjured" else ""} {"and" if scenario_type=="mixed" else ""} {uninj_str if scenario_type!="injured" else ""}. be specific about environment, weather, {"injury type" if scenario_type!="uninjured" else ""} and any other necessary things to make it a realistic as possible, come up with interractions the soldiers may have in their scenarios. it is very important to emphasise the drone perspective, it should be panning accross. tell me it in plain text with no introduction."
+            }
+        ],
+        "model": "openai/gpt-oss-120b:cerebras"
+    })
+
+    # ✅ Extract just the content string
+    text = response["choices"][0]["message"]["content"]
+
+    # ✅ Print it nicely (unescaped)
+    return(text)
+
 # Discord Bot Logic
 @bot.event
 async def on_ready():
