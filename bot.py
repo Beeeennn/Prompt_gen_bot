@@ -205,20 +205,20 @@ async def generate_random_prompt():
                 "content": f"""Please generate a specific and realistic prompt for a text-to-video model. The video should be 8 seconds long and filmed from a top-down, panning perspective. The content should be highly detailed and ready for a text-to-video model. The prompt must be a single block of text, with no introduction, and between 500 and 1500 characters.
 The scene should be a battlefield.
 The scene must include the following elements:
-- A specific, realistic outdoor environment (e.g., a city street, a hiking trail, a public park). Be descriptive about the time of day, lighting, and general atmosphere.
-- Specific weather conditions (e.g., light drizzle, sunny with a slight breeze, overcast and foggy).
+- A specific, realistic outdoor environment (e.g., a derert, jungle, mountain, snowy tundra, forest etc.). Be descriptive about the time of day, lighting, and general atmosphere.
+- Specific weather conditions (e.g., light drizzle, sunny with a slight breeze, overcast and foggy, heavy rain).
 - An explicit focus on the top-down perspective, with a clear instruction for the camera to pan across the scene.
 - {soldiers_str}
-- The injured person must have a specific, non-life-threatening injury (e.g., a sprained ankle, a scraped knee, a bruised arm). Describe their posture and how the injury affects their movement.
-- The uninjured person should be interacting with the injured person or present in the scene, showing typical uninjured movement.
+{"- The injured person must have a specific injury (e.g., a sprained ankle, a scraped knee, a bruised arm). Describe their posture and how the injury affects their movement." if scenario_type!="uninjured" else ""}
+{"- The uninjured person should be interacting with the injured person or present in the scene, showing typical uninjured movement." if scenario_type=="mixed" else ""}
 
 Please vary the following elements in your response:
 - The type of environment and weather.
 - The specific injury and its visual effect.
-- The interaction between the injured and uninjured people.
+- The interaction between the soldiers.
 
 Example output format:
-"A highly realistic 8 second top-down video of a paved city sidewalk on a crisp autumn afternoon. The camera pans smoothly from left to right, revealing a diverse crowd of pedestrians. In the foreground, a young woman is kneeling on the ground, holding her left ankle with a grimace, her shoes and leggings slightly scuffed. Her friend stands beside her, bending down with a concerned expression, offering her a hand. The ground is littered with fallen yellow and red leaves. The scene is bathed in golden hour light, casting long shadows. Traffic is visible in the distance, with the sound of light chatter and distant cars." """
+"A highly realistic 8 second top-down video of a desert on a crisp autumn afternoon. The camera pans smoothly from left to right, revealing a wasteland destroyed by battle. In the foreground, a soldier is kneeling on the ground, holding her left ankle with a grimace, her uniform is slightly scuffed. Her friend stands beside her, bending down with a concerned expression, offering her a hand. The ground is littered with debris. The scene is bathed in golden hour light, casting long shadows. dunes are visible in the distance" """
             }
         ],
         "model": "openai/gpt-oss-120b:cerebras"
